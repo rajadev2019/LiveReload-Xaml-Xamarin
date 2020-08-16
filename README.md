@@ -6,16 +6,28 @@ https://forums.xamarin.com/discussion/128896/xamarin-livereload-not-showing-my-c
 I've had good luck with it - fairly impressed actually - as follows.
 
 Make sure PC and Tablet are on the same Wifi network.
+
 Turn off firewall
+
 Delete the app from the tablet if it already exists
+
 Make sure you are XamForms 3.x
-Make sure you have Installed LiveReload correctly. For a .NET standard solution it goes in the shared project but not the individual platforms.
+
+Make sure you have Installed LiveReload correctly.
+For a .NET standard solution it goes in the shared project but not the individual platforms.
+
 Make sure you are initializing LiveReload per the documentation (Below https://docs.microsoft.com/en-us/xamarin/xamarin-forms/xaml/live-reload).
+
 Rebuild solution in Visual Studio
+
 Deploy solution
+
 Start app on the tablet
+
 In Visual Studio open a XAML file
-In the title area you should see a prompt that LiveReload is installed but not connected. Click the connect link.
+
+In the title area you should see a prompt that LiveReload is installed but not connected.
+Click the connect link.
 
 Update the XAML for the page that is being presented.
 SAVE THE XAML - that is when the update is pushed to the tablet.
@@ -76,13 +88,19 @@ Add LiveReload.Init(); to the constructor in the Application class, as shown in 
 C#
 
 Copy
+
 public partial class App : Application
+
 {
+
     public App ()
     {
         // Initialize Live Reload.
+        
         #if DEBUG
+        
         LiveReload.Init();
+        
         #endif
         
         InitializeComponent();
@@ -90,12 +108,16 @@ public partial class App : Application
     }
 }
 3. Start live reloading
-Compile and deploy your application. Once the app is the deployed, open a XAML file, make some changes, and save the file. Your changes are redeployed to the deployment target.
+Compile and deploy your application.
+Once the app is the deployed, open a XAML file, make some changes, and save the file.
+Your changes are redeployed to the deployment target.
 
 
-Live Reload works with changes to any XAML file. Changes to C# or adding/removing NuGet packages requires a new build and deploy to take effect.
+Live Reload works with changes to any XAML file.
+Changes to C# or adding/removing NuGet packages requires a new build and deploy to take effect.
 
 Frequently Asked Questions
+
 Is Xamarin Live Reload available on Visual Studio for Mac?
 No, preview release of Xamarin Live Reload is only available for Visual Studio 2017.
 
@@ -118,6 +140,7 @@ Does it require debugging the app?
 No. In fact, you can even start all your supported application targets (Android, iOS, and UWP) on any number of devices or simulators/emulators and see them all update at once.
 
 Limitations
+
 Only reloading of XAML is supported.
 UI state may not be maintained between redeploys, unless using MVVM.
 Known Issues
@@ -146,21 +169,27 @@ Exception while loading assemblies: System.IO.FileNotFoundException: Could not l
 The host project should be using PackageReference instead of packages.config
 
 App doesn't connect
+
 When the application is built, the information from Tools > Options > Xamarin > Live Reload (host name, port and encryption keys) are embedded in the app, so that when LiveReload.Init() runs, no pairing or configuration is necessary for the connection to succeed.
 
 Other than normal networking problems (firewall, device on a different network), the main reason the app may not successfully connect IDE is because its configuration differs from the one in Visual Studio. This may happen if:
 
 App was compiled on a different machine.
+
 App was compiled and deployed in a different Visual Studio session, and Auto-generate encryption keys is checked (the default) in Tools > Options > Xamarin > Live Reload.
 Visual Studio settings were changed (i.e. hostname, port or encryption keys) but the app was not built and deployed again.
 These cases are all solved by building and deploying the app again.
 
 Uninstalling Preview 1
+
 If you have an older preview and you have problems uninstalling it, follow these steps:
 
 Delete the folder C:\Program Files (x86)\Microsoft Visual Studio\Preview\Enterprise\Common7\IDE\Extensions\Xamarin\LiveReload (NOTE: replace "Enterprise" with your installed edition, and "Preview" with "2017" if you installed to a stable VS)
+
 Open a Developer command prompt for that Visual Studio and run devenv /updateconfiguration.
+
 Tips & Tricks
+
 As long as the Live Reload settings don't change (including the encryption keys, such as if you turn off Auto-generate encryption keys) and you build from the same machine, you don't need to build and deploy the app after the initial deploy, unless you change code or dependencies. You can just launch again a previously deployed app and it will connect to the last host used.
 
 There is no limitation on how many devices you can connect to the same Visual Studio session. You can deploy and start the app in as many devices/simulators as necessary to see the live reloading working on all of them at the same time.
