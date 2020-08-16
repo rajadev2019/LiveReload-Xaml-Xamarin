@@ -1,5 +1,5 @@
 # LiveReload-Xaml-Xamarin
-No 3rd Party Plugin
+No 3rd Party Plugin is required, even though plugins are installed, they were not required.
 
 https://forums.xamarin.com/discussion/128896/xamarin-livereload-not-showing-my-changes
 
